@@ -66,4 +66,13 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+
+    public function beforeRender(Event $event)
+    {
+        if ($this->request->getSession()->read('Auth.User')) {
+            $this->set('loggedIn', true);
+        } else {
+            $this->set('loggedIn', false);
+        }
+    }
 }
